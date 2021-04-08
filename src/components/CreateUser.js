@@ -1,9 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Expire from './Expire';
+import Alert from "./Alert";
 
 class CreateUser extends Component {
-  state = { email: "", password: "", type: "Clerk",showalert:false};
+  state = {
+    email: "",
+    password: "",
+    type: "clerk",
+    toggle: "far fa-eye",
+    show: false,
+    message: "",
+    class: "",
+  };
   handleEmail = (e) => {
     this.setState({ email: e.target.value });
   };
@@ -14,19 +22,34 @@ class CreateUser extends Component {
     this.setState({ type: e.target.value });
   };
   handleSubmit = (e) => {
-    axios.post("http://localhost:8000/api/createUser", this.state).then((res) => {
-      if (res.data) {
-        this.setState({showalert: true})
-        
-      }
-    });
+    axios
+      .post("http://localhost:8000/api/createUser", this.state)
+      .then((res) => {
+        if (res.data) {
+          this.setState({ show: false });
+          this.setState({
+            show: true,
+            message: res.data[0],
+            class: res.data[1],
+          });
+        }
+      });
     e.preventDefault();
+  };
+  handleVisibility = () => {
+    if (this.state.type === "password") {
+      this.setState({
+        type: "text",
+        toggle: "far fa-eye  fa-lg fa-eye-slash fa-lg",
+      });
+    } else {
+      this.setState({ type: "password", toggle: "far fa-eye fa-lg" });
+    }
   };
   render() {
     return (
-      <div className="login">
       <form onSubmit={this.handleSubmit}>
-        <label>Email: </label>
+        <label>email: </label>
         <input
           type="email"
           value={this.state.email}
@@ -34,30 +57,37 @@ class CreateUser extends Component {
           required
         />
         <br></br>
-        <label>Password: </label>
+        <label>password: </label>
         <input
-          type="password"
+          type={this.state.type}
+          placeholder="Enter Password"
           value={this.state.password}
           onChange={this.handlePassword}
           required
         />
+        <i
+          className={this.state.toggle}
+          id="togglePassword"
+          onClick={this.handleVisibility}
+        />
         <br></br>
         <label>
-          Type:
-          <select value={this.state.type} onChange={this.handleType}>
-            <option value="Manager">Manager</option>
-            <option value="Clerk">Clerk</option>
-            <option value="Owner">Owner</option>
+          type:
+          <select value={this.state.type} onChange={(e) => this.handleType(e)}>
+            <option value="manager">manager</option>
+            <option value="clerk">clerk</option>
+            <option value="owner">owner</option>
           </select>
         </label>
         <br></br>
         <input type="submit" value="create User" />
+        <Alert
+          show={this.state.show}
+          time="5000"
+          message={this.state.message}
+          type={this.state.class}
+        />
       </form>
-      {this.state.showalert &&(<Expire delay="3000">
-              <div className="alert alert-success" role="alert">
-                New user created
-              </div></Expire>)}
-      </div>
     );
   }
 }

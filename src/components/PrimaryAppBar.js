@@ -16,17 +16,16 @@ import PropTypes from "prop-types";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
-import Users from "./Users.js";
 import CreateUser from "./CreateUser";
 import { Link, Redirect } from "react-router-dom";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Manager from "./Manager.js";
 import ViewFood from "./ViewFood.js";
-import AddFoodItem from "./AddFoodItem.js";
 import Invoice from "./Invoice";
 import PurchaseList from "./PurchaseList.js";
 import Ingredients from "./Ingredients.js";
 import FoodPrice from "./FoodPrice";
+import ShowUsers from "./ShowUsers";
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -298,7 +297,7 @@ export default function PrimaryAppBar() {
         {type === "owner" && (
           <div>
             <TabPanel value={value} index={0}>
-              <Users />
+              <ShowUsers />
             </TabPanel>
             <TabPanel value={value} index={1}>
               <CreateUser />

@@ -48,7 +48,7 @@ class Ingredients extends Component {
   handlenewdelete = () => {
     const values = [...this.state.newingredients];
 
-    if (values.length != 1) values.pop();
+    if (values.length !== 1) values.pop();
 
     this.setState({ newingredients: values });
   };

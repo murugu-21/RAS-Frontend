@@ -2,8 +2,6 @@ import axios from "axios";
 import React, { Component } from "react";
 import printJS from "print-js";
 import "./Addfooditems.css";
-import Alert from "./Alert.js";
-import fileDownload from "js-file-download";
 
 class Invoice extends Component {
   state = {

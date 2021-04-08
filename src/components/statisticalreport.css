@@ -1,0 +1,12 @@
+.charts {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 70vh;
+  height: 70vh;
+  justify-content: space-between;
+}
+
+.charts > div {
+  margin: 50px;
+}

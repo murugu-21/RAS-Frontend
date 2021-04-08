@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import "../App.css";
 import axios from "axios";
+import {Redirect} from 'react-router-dom';
 
 class Login extends Component {
   state = {
     email: "",
     password: "",
+    type: "password",
+    toggle: "far fa-eye",
+    EmailError: "",
+    pass_error: "",
   };
 
   handleChange1 = (event) => {
@@ -18,40 +23,53 @@ class Login extends Component {
 
   handleSubmit = (event) => {
     axios
-      .post("/api/loginCheck", {
+      .post("http://localhost:8000/api/loginCheck", {
         email: this.state.email,
         password: this.state.password,
       })
       .then((res) => {
-        if (res.data["type"] === "Owner") {
-          localStorage.setItem("email", res.data["email"]);
-          localStorage.setItem("type", res.data["Owner"]);
-          alert(res.data);
-        } else if (res.data["type"] === "Manager") {
-          alert(res.data);
-        } else if (res.data["type"] === "Clerk") {
-          alert(res.data);
+        if (res.data.type) {
+          window.sessionStorage.setItem("email", res.data.email);
+          window.sessionStorage.setItem("type", res.data.type);  
+          window.location.reload();
+              
         } else {
-          alert(res.data);
+          if (res.data.err === "email"){
+            this.setState({ EmailError: res.data.msg});
+            this.setState({ pass_error: ""});
+          }
+          else{
+            this.setState({ pass_error: res.data.msg});
+            this.setState({ EmailError: ""});
+          }
         }
       });
     event.preventDefault();
   };
 
-  render() {
-    console.log(localStorage.getItem("email"));
-    if (localStorage.getItem("email") === "admin@gmail.com") {
-      return <h1>Welcome</h1>;
+  handleVisibility = () => {
+    if (this.state.type === "password") {
+      this.setState({ type: "text", toggle: "far fa-eye  fa-lg fa-eye-slash fa-lg" });
+    } else {
+      this.setState({ type: "password", toggle: "far fa-eye fa-lg" });
     }
+  };
+
+  render() {
+    if (window.sessionStorage.getItem("email") != null) {
+      return (<Redirect to="/Demo" />  ) ;   
+    }
+
     return (
-      <div className="login">
-        <img
-          src="https://www.fit2work.com.au/assets/img/avatars/LoginIconAppl.png"
-          alt="profilepic"
-          className="avatar"
-        />
-        <h1>Login</h1>
-        <form onSubmit={this.handleSubmit}>
+      <div id="login">
+        <div className="bg-img"></div>
+        <form onSubmit={this.handleSubmit} className="login">
+          <img
+            src="https://www.fit2work.com.au/assets/img/avatars/LoginIconAppl.png"
+            alt="profilepic"
+            className="avatar"
+          />
+          <h1>Login</h1>
           <p>Email :</p>
           <input
             type="email"
@@ -60,16 +78,24 @@ class Login extends Component {
             value={this.state.email}
             required
           />
+          <i className="far fa-user-circle fa-lg"></i>
+          <p className="error">{this.state.EmailError && <i class="fa fa-exclamation-circle fa-s" aria-hidden="true"></i>}{"  "+this.state.EmailError}</p>
           <p>Password :</p>
           <input
-            type="password"
+            type={this.state.type}
             placeholder="Enter Password"
             onChange={this.handleChange2}
             value={this.state.password}
             required
           />
-          <input type="submit" name="login_submit" value="submit" />
-          <a href="#">Forgot password</a>
+          <i
+            className={this.state.toggle}
+            id="togglePassword"
+            onClick={this.handleVisibility}
+          />
+          <p className="error">{this.state.pass_error && <i class="fa fa-exclamation-circle fa-s" aria-hidden="true"></i>}{"  "+this.state.pass_error}</p>
+          <input type="submit" name="login_submit" value="Submit" />
+          <a href="/ForgotPassword">Forgot password</a>
         </form>
       </div>
     );

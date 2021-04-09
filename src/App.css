@@ -5,9 +5,19 @@ body,
 #login {
   font-family: sans-serif;
   height: 100%;
+  background-color: rgb(255, 255, 255);
 }
+
 .bg-img {
   background-image: url("https://cdn.hipwallpaper.com/i/10/41/7qYFf8.jpg");
+  min-height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.changePassword {
+  background-image: url("data:image/jpeg;base64,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");
   min-height: 100%;
   /* Center and scale the image nicely */
   background-position: center;
@@ -78,7 +88,7 @@ body,
   font-size: 18px;
   border-radius: 20px;
   text-align: center;
-  padding-top:0.5em;
+  padding-top: 0.5em;
 }
 
 .login input[type="submit"]:hover {
@@ -104,18 +114,120 @@ body,
 }
 
 .container i {
-  
   margin-right: 30px;
   cursor: pointer;
 }
 
-.error{
+.error {
   color: rgb(197, 169, 7);
   font-size: small;
-  font-weight: lighter ! important; 
-  text-align: center ! important;
+  font-weight: lighter !important;
+  text-align: center !important;
 }
 
-#togglePassword{
+#togglePassword {
   font-size: large;
+}
+
+.logo {
+  height: 3em;
+  width: 3.5em;
+}
+
+.createuser {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 320px;
+  height: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  box-sizing: border-box;
+  padding: 70px 30px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.createuser input {
+  background: transparent;
+  width: 200px;
+  padding: 1em;
+  margin-bottom: 2em;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5000px;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+  color: rgb(0, 0, 0);
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.createuser input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(0, 0, 0);
+  opacity: 1; /* Firefox */
+}
+.createuser input:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+}
+.createuser input[type="email"]:focus,
+.createuser input[type="password"]:focus {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+}
+.createuser input[type="button"] {
+  margin-top: 10px;
+  width: 150px;
+  font-size: 1rem;
+}
+.createuser input[type="button"]:hover {
+  cursor: pointer;
+}
+.createuser input[type="button"]:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.user {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  box-sizing: border-box;
+  padding: 70px 30px;
+}
+.user input {
+  background: transparent;
+  width: 200px;
+  padding: 1em;
+  margin-bottom: 2em;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+  color: rgb(0, 0, 0);
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }

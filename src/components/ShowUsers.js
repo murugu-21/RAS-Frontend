@@ -45,7 +45,7 @@ class ShowUsers extends Component {
       this.setState({
         show: true,
         message: "Owner cannot be deleted",
-        class: "warning",
+        class: "danger",
       });
     } else {
       axios
